@@ -1,8 +1,8 @@
 var mysql = require("mysql2");
 var db = mysql.createConnection({
-  host: "127.0.0.1",
+  host: "rds-sword.czmsy2g2m4cg.ap-northeast-2.rds.amazonaws.com",
   user: "root",
-  password: "1234",
+  password: "gozld13!#",
   database: "board",
   dateStrings: "date",
 });
