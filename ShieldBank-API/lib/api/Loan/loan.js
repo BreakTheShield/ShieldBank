@@ -15,7 +15,7 @@ var { encryptResponse, } = require("../../../middlewares/crypt");
  */
 router.post('/', validateUserToken, (req, res) => {          // from /loan
     var r = new Response();
-    let username = req.body.username;
+    let username = req.username;
     Model.users.findAll({          // select username from users where username = username and is_loan = true;        
         where: {
             username : username,
