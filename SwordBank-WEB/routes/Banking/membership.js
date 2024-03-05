@@ -67,37 +67,62 @@ router.get('/', checkCookie, function (req, res) {          // 멤버십 페이�
     })
 });
 
-router.get('/silver', [checkCookie, IpCheck], function (req, res, next) {          // silver 일 때 화면 불러오기
+router.get('/silver', [checkCookie, IpCheck], function (req, res, next) {
     const id = req.query.id;
-    userdb.query(`UPDATE users
+    const cookie = req.cookies.Token;
+    profile(cookie).then((pending) => {
+        if (pending.data.username == "admin") {
+        userdb.query(`UPDATE users
                   SET membership = 'SILVER'
-                  WHERE id =${id};`, function (error, results) {
-        if (error) { throw error; }
-    });
-
-    return res.redirect("/bank/membership")
+                  WHERE id =${id};`)
+                  return res.redirect("/bank/membership")
+                
+        } else {
+            res.send(`<script>
+            alert("관리자가 아닙니다");
+            location.href=\"/bank/membership\";
+            </script>`);
+        }
+    })
 });
+
 
 router.get('/gold', [checkCookie, IpCheck], function (req, res, next) {          // gold 일 때 화면 불러오기
     const id = req.query.id;
-    userdb.query(`UPDATE users
+    const cookie = req.cookies.Token;
+    profile(cookie).then((pending) => {
+        if (pending.data.username == "admin") {
+        userdb.query(`UPDATE users
                   SET membership = 'GOLD'
-                  WHERE id =${id};`, function (error, results) {
-        if (error) { throw error; }
-    });
-
-    return res.redirect("/bank/membership")
+                  WHERE id =${id};`)
+                  return res.redirect("/bank/membership")
+                
+        } else {
+            res.send(`<script>
+            alert("관리자가 아닙니다");
+            location.href=\"/bank/membership\";
+            </script>`);
+        }
+    })
 });
 
 router.get('/platinum', [checkCookie, IpCheck], function (req, res, next) {          // platinum 일 때 화면 불러오기
     const id = req.query.id;
-    userdb.query(`UPDATE users
+    const cookie = req.cookies.Token;
+    profile(cookie).then((pending) => {
+        if (pending.data.username == "admin") {
+        userdb.query(`UPDATE users
                   SET membership = 'PLATINUM'
-                  WHERE id =${id};`, function (error, results) {
-        if (error) { throw error; }
-    });
-
-    return res.redirect("/bank/membership")
+                  WHERE id =${id};`)
+                  return res.redirect("/bank/membership")
+                
+        } else {
+            res.send(`<script>
+            alert("관리자가 아닙니다");
+            location.href=\"/bank/membership\";
+            </script>`);
+        }
+    })
 });
 
 module.exports = router;
