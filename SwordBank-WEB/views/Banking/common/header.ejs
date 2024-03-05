@@ -20,6 +20,22 @@
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
+    <style>
+        /* 이거 토글 화살표 삭제 하는 스타일ㅎㅎ */
+        a#userDropdown.dropdown-toggle::after {
+            display: none;
+        }
+
+        a#userDropdown.dropdown-toggle {
+            padding-right: 0;
+        }
+
+        .dropdown-menu {
+        left: auto;
+        right: 0;
+    }
+    </style>
+
     <!-- script -->
     <script>
         $(document).ready(function(){
@@ -288,13 +304,19 @@
 
                     <div class="topbar-divider d-none d-sm-block"></div>
                     <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="/bank/list" id="userDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= pending.data.username %></span>
-                            <img class="img-profile rounded-circle"
-                                 src="../img/undraw_profile.svg">
-                        </a>
+                    <li class="nav-item dropdown">
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="display: flex; align-items: center;">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="margin-top: 20px; margin-right: 30px;"><%= pending.data.username %></span>
+                                <img class="img-profile rounded-circle" src="../img/undraw_profile.svg" style="margin-right: 40px; max-width: 30px; max-height: 30px; margin-top: 20px;">
+                            </a>
+                            
+                            <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="/user/logout">로그아웃</a></li>
+                                <li><a class="dropdown-item" href="../user/changePass">비밀번호 변경</a></li>
+                            </ul>
+                        </div>
+                    </li>        
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                              aria-labelledby="userDropdown">
@@ -306,6 +328,7 @@
                             </a>
                         </div>
                     </li>
+                    
 
                 </ul>
 
@@ -412,12 +435,12 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                            어드민 속성
+                                            계좌 총액
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%= pending.data.is_admin %></div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">₩ <%= pending.data.total_balance %></div>
                                     </div>
                                     <div class="col-auto">
-                                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                        <i class="fas fa-won-sign fa-2x text-gray-300"></i>
                                     </div>
                                 </div>
                             </div>

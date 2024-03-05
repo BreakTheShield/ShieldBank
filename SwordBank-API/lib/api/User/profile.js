@@ -19,19 +19,35 @@ router.post('/', validateUserToken, (req, res) => {
         where: {
             account_number: req.account_number
         },
-        attributes: ["balance", "account_number", "username", "is_admin", "membership", "is_mydata","is_loan"]
+        attributes: ["balance", "account_number", "username", "is_admin", "membership", "is_mydata", "is_loan"]
     }).then((user) => {
-        if(user) {          // user가 존재하는 경우
-            r.status = statusCodes.SUCCESS;
-            r.data = user;
-            return res.json(encryptResponse(r));          // SUCCESS를 return
-        } else {          // user가 존재하는 경우
-            r.status = statusCodes.NOT_AUTHORIZED;
-            r.data = {
-                "message": "Not authorized"
+        Model.account.findAll({
+            where: {
+                username: req.username
+            },
+            attributes: [
+                [Model.sequelize.fn('sum', Model.sequelize.col('balance')), 'total_balance'],
+            ],
+            raw: true
+        }).then((total) => {
+            total[0].total_balance = Number(total[0].total_balance);
+            total[0].total_balance = total[0].total_balance.toLocaleString();
+            user.dataValues = Object.assign({}, user.dataValues, total[0]);          //pending에 total_balance도 추가해주는 것.
+            console.log(user);
+            if (user) {          // user가 존재하는 경우
+                r.status = statusCodes.SUCCESS;
+                r.data = user;
+                return res.json(encryptResponse(r));          // SUCCESS를 return
+            } else {          // user가 존재하는 경우
+                r.status = statusCodes.NOT_AUTHORIZED;
+                r.data = {
+                    "message": "Not authorized"
+                }
+                return res.json(encryptResponse(r));          // Not Authorized를 return
             }
-            return res.json(encryptResponse(r));          // Not Authorized를 return
-        }
+
+        })
+
     }).catch((err) => {
         r.status = statusCodes.SERVER_ERROR;
         r.data = {

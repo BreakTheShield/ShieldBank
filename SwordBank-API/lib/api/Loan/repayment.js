@@ -17,7 +17,7 @@ router.post('/', validateUserToken, (req, res) => {          // from /loan.js/re
     var r = new Response();
     let account_number = req.body.selected_account;
     let repayment_amount = req.body.repayment_amount;
-    let username = req.body.username;
+    let username = req.username;
 
     if (repayment_amount <= 0) {          // 입력한 상환 금액이 0보다 작거나 같으면 BAD_INPUT return
         r.status = statusCodes.BAD_INPUT;

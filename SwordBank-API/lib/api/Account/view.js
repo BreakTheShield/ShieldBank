@@ -18,7 +18,35 @@ router.post('/', validateUserToken, (req, res) => {
         where: {
             username: req.username
         },
-        attributes: ["balance", "account_number", "bank_code"]
+        attributes: ["balance", "account_number", "bank_code","username"]
+    }).then((data) => {
+        if(data.length > 0) {          // account테이블에 username이 존재한다면
+            r.status = statusCodes.SUCCESS;
+            r.data = data;
+            return res.json(encryptResponse(r));
+        } else {          // account테이블에 username이 존재하지 않는다면
+            r.status = statusCodes.NOT_AUTHORIZED;
+            r.data = {
+                "message": "Not authorized"
+            }
+            return res.json(encryptResponse(r));
+        }
+    }).catch((err) => {
+        r.status = statusCodes.SERVER_ERROR;
+        r.data = {
+            "message": err.toString()
+        };
+        res.json(encryptResponse(r));
+    });
+});
+
+router.post('/find_username', validateUserToken, (req, res) => {          
+    var r = new Response();
+    Model.account.findone({          // select balance, account_number, bank_code from account where username = req.username;
+        where: {
+            username: req.username
+        },
+        attributes: ["username"]
     }).then((data) => {
         if(data.length > 0) {          // account테이블에 username이 존재한다면
             r.status = statusCodes.SUCCESS;

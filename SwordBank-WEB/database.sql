@@ -22,8 +22,8 @@ create table loan
    id            integer PRIMARY KEY auto_increment,
    username       varchar(100) UNIQUE          NOT NULL,
    foreign key(username) references users(username),
-   loan_amount      BIGINT                    NOT NULL
-   
+   loan_amount      BIGINT                    NOT NULL,
+   loan_time        TIMEDATE                NOT NULL
 ) engine = innodb;
 
 create table transactions
