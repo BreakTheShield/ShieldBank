@@ -8,7 +8,7 @@ var { encryptResponse, } = require("../../../middlewares/crypt");
 
 const axios = require('axios');
 
-const apiUrl = 'http://192.168.10.131:3000/api/mydata/res_account';
+const apiUrl = 'http://20.0.20.221:3000/api/mydata/res_account';
 /**
  * Beneficiary approve route
  * This endpoint allows to view is_loan of any user

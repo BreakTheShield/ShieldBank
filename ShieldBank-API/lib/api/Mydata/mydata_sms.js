@@ -12,7 +12,7 @@ var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
  * @middleware
  * @return
  */
-const test_api_url = "http://192.168.10.131:3000/api/mydata/b_api";
+const test_api_url = "http://20.0.20.221:3000/api/mydata/b_api";
 
 function generateRandomVerificationCode() {          // 인증번호 랜덤 값 생성
     const min = 1000;
