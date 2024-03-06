@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "root",
-    "password": "gozld13!#",
+    "password": "1234",
     "database": "dvba",
-    "host": "rds-shield.czmsy2g2m4cg.ap-northeast-2.rds.amazonaws.com",
+    "host": "127.0.0.1",
     "dialect": "mysql",
     "board_database": "board"
   }

@@ -1,10 +1,9 @@
 {
-    "development": {
-      "username": "root",
-      "password": "gozld13!#",
-      "database": "board",
-      "host": "rds-shield.czmsy2g2m4cg.ap-northeast-2.rds.amazonaws.com",
-      "dialect": "mysql"
-    }
+  "development": {
+    "username": "root",
+    "password": "1234",
+    "database": "board",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   }
-  
+}
