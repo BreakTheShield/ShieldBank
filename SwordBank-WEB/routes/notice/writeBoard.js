@@ -1,3 +1,5 @@
+routes/notice/writeBoard.js
+
 var db = require("../../middlewares/db");
 var {seoultime} = require("../../middlewares/seoultime");
 var express = require("express");
@@ -32,7 +34,7 @@ const upload = multer({
     storage: multer.diskStorage({
         destination: function (req, file, cb) {          // 파일 저장 위치를 ../file 디렉토리에 저장
             console.log(req.body.fid);
-            cb(null, "../file");
+            cb(null, "/home/AWS-SwordBank/SwordBank-WEB/file");
         },
         filename: function (req, file, cb) {          // 파일 이름을 upload한 이름 그대로 사용
             cb(null, file.originalname);
@@ -40,8 +42,7 @@ const upload = multer({
     }),
 });
 
-router.post(
-    "/write",
+router.post("/write",
     checkCookie,
     upload.single("imgimg"), // 파일 업로드 설정
     function (req, res, next) {
@@ -60,7 +61,7 @@ router.post(
                         title: title,
                         contents: contents,
                         userId: userId,
-                        file: fs.createReadStream(req.file.path),
+                        file: req.file.path.replace(/\\/g, "/"),
                     },
                 }, 
                 function (error, response, body) {
@@ -80,7 +81,7 @@ router.post(
             // 데이터베이스에 데이터를 삽입
             db.query(
                 `INSERT INTO notices
-                 VALUES (NULL, '${userId}', '${title}', '${contents}', '${req.file ? req.file.originalname : "null"}', '${seoultime}', '${seoultime}')`,
+                 VALUES (NULL, '${userId}', '${title}', '${contents}', '${req.file ? req.file.path.replace(/\\/g, "/"): "null"}', '${seoultime}', '${seoultime}')`,
                 function (error, results) {
                     if (error) {
                         throw error;

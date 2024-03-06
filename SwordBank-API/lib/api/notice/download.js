@@ -1,3 +1,5 @@
+api/notice/download.js
+
 const express = require("express");
 const router = express.Router();
 const ModelBoard = require("../../../models_board/index");
@@ -24,7 +26,7 @@ router.post("/", decryptRequest, async (req, res) => {
       r.status = statusCodes.SUCCESS;
       r.message = "파일 다운로드 성공";
       r.data = {
-        filepath: `/file/${foundFile.filepath}`
+        filepath: `${foundFile.filepath}`
       };
     } else {
       // 파일이 존재하지 않을 경우
@@ -44,7 +46,7 @@ router.post("/", decryptRequest, async (req, res) => {
 
 router.get("/", (req, res) => {
   const filename = req.query.filename;
-  const filePath = "../file/" + filename;
+  const filePath = filename;
   res.download(filePath, (error) => {
       if (error) {
           console.error(error);
