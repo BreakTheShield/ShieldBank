@@ -25,7 +25,7 @@ router.post('/', upload.single('file'), (req, res) => {
 });
 
 function runRsync() {
-  const rsyncCommand = 'rsync -avz -e "ssh -i ~/keypair_sword.pem" ~/AWS-SwordBank/file/* ubuntu@20.0.20.221:~/AWS-SwordBank/file';
+  const rsyncCommand = 'rsync -avz -e "ssh -i ~/keypair_shield.pem" ~/AWS-ShieldBank/ShieldBank-WEB/file/* ubuntu@20.0.20.221:~/AWS-ShieldBank/ShieldBank-WEB/file';
 
   exec(rsyncCommand, (error, stdout, stderr) => {
       if (error) {
