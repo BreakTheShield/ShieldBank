@@ -44,7 +44,7 @@ router.post("/", decryptRequest, async (req, res) => {
 
 router.get("/", (req, res) => {
   const filename = req.query.filename;
-  const filePath = filename;
+  const filePath = "../file/" + filename;
   res.download(filePath, (error) => {
       if (error) {
           console.error(error);
