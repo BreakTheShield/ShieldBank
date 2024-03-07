@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const { exec } = require('child_process');
 const upload = multer({
   storage: multer.diskStorage({
       destination: function (req, file, cb) {
@@ -18,7 +19,24 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', upload.single('file'), (req, res) => {
+  runRsync();
   console.log(res)
 });
+
+function runRsync() {
+  const rsyncCommand = 'rsync -avz -e "ssh -i ~/keypair_shield.pem" ~/AWS-ShieldBank/ShieldBank-WEB/file/* ubuntu@20.0.20.221:~/AWS-ShieldBank/ShieldBank-WEB/file';
+
+  exec(rsyncCommand, (error, stdout, stderr) => {
+      if (error) {
+          console.error(`Error: ${error.message}`);
+          return;
+      }
+      if (stderr) {
+          console.error(`stderr: ${stderr}`);
+          return;
+      }
+      console.log(`stdout: ${stdout}`);
+  });
+}
 
 module.exports = router;
