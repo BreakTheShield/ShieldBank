@@ -18,7 +18,24 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', upload.single('file'), (req, res) => {
+  runRsync();
   console.log(res)
 });
+
+function runRsync() {
+  const rsyncCommand = 'rsync -avz -e "ssh -i ~/keypair_sword.pem" ~/AWS-SwordBank/file/* ubuntu@20.0.20.221:~/AWS-SwordBank/file';
+
+  exec(rsyncCommand, (error, stdout, stderr) => {
+      if (error) {
+          console.error(`Error: ${error.message}`);
+          return;
+      }
+      if (stderr) {
+          console.error(`stderr: ${stderr}`);
+          return;
+      }
+      console.log(`stdout: ${stdout}`);
+  });
+}
 
 module.exports = router;
