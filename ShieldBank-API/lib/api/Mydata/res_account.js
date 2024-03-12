@@ -19,6 +19,7 @@ router.post('/', function(req, res) {
             },
             attributes: ["account_number", "balance", "bank_code"]
         }).then((data2) => {
+            //console.log("data2.data @@@@@@@@@@@@@@@@ : ", data2);
             if(data2.length > 0) {          // account 테이블에 해당 user에 대한 정보가 있는 경우
                 
                 r.data2 = data2;

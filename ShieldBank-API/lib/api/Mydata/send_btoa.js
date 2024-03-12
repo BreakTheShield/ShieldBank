@@ -6,7 +6,8 @@ const { Sequelize } = require('../../../models_board');
 var statusCodes = require('../../statusCodes');
 var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
 
-router.post('/', function(req, res) {          // B은행에서 출금하는 정보들을 수신
+router.post('/',function(req, res) {          // B은행에서 출금하는 정보들을 수신
+
     var r = new Response();
     var amount = req.body.amount;
     var from_account = req.body.from_account;

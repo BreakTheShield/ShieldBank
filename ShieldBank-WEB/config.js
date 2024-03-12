@@ -1,2 +1,2 @@
-var api_url = "http://127.0.0.1:3000"
+var api_url = "https://shield-bank.com"
 module.exports = {api_url};

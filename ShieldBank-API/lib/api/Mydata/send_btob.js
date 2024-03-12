@@ -21,6 +21,7 @@ router.post('/', function (req, res) {          // post로 요청받은 data
         },
         attributes: ["balance"]
     }).then((toAccountData) => {
+        console.log("1111111111111111111");
         if (toAccountData) {
             // 출금 계좌 정보 조회
             Model.account.findOne({
@@ -87,6 +88,7 @@ router.post('/', function (req, res) {          // post로 요청받은 data
 
 // 서버 오류 처리 함수
 function handleServerError(res, response) {
+    console.log("1111111111111111111");
     response.status = statusCodes.SERVER_ERROR;
     response.data = {
         "message": "송금에 실패했습니다."

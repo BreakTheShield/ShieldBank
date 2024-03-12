@@ -8,7 +8,7 @@ var { validateUserToken } = require("../../../middlewares/validateToken");
 var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
 
 const axios = require('axios');
-const apiUrl = 'http://20.0.20.221:3000/api/mydata/send_btob';
+const apiUrl = 'https://shield-bank.com/api/mydata/send_btob';
 
 /**
  * Balance transfer route
@@ -18,7 +18,7 @@ const apiUrl = 'http://20.0.20.221:3000/api/mydata/send_btob';
  * @param amount         - Amount to be transferred
  * @return               - Status
  */
-router.post('/', [validateUserToken, decryptRequest], (req, res) => {          // B은행 계좌에서 B은행 계좌로 송금하는 경우
+router.post('/', [validateUserToken,decryptRequest], (req, res) => {          // B은행 계좌에서 B은행 계좌로 송금하는 경우
     var r = new Response();
     let from_account = req.body.from_account;
     let to_account = req.body.to_account;

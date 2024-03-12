@@ -5,7 +5,7 @@ var Response = require('../../Response');
 const Sequelize = require("sequelize");
 var statusCodes = require('../../statusCodes');
 var { validateUserToken } = require("../../../middlewares/validateToken");
-var { encryptResponse, } = require("../../../middlewares/crypt");
+var { encryptResponse,decryptRequest } = require("../../../middlewares/crypt");
 
 
 /**
@@ -15,7 +15,7 @@ var { encryptResponse, } = require("../../../middlewares/crypt");
  * @middleware                       - Checks admin authorization
  * @return                           - Status
  */
-router.post('/', validateUserToken, (req, res) => {               // from /loan.js/loan_cancel
+router.post('/', [validateUserToken,decryptRequest], (req, res) => {               // from /loan.js/loan_cancel
     var r = new Response();
     let account_number = req.body.selected_account;
     let username = req.username;

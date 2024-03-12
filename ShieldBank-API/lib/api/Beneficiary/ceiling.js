@@ -4,7 +4,7 @@ var Model = require('../../../models/index');
 var Response = require('../../Response');
 var statusCodes = require('../../statusCodes');
 var { validateUserToken } = require("../../../middlewares/validateToken");
-var { encryptResponse } = require("../../../middlewares/crypt");
+var { encryptResponse,decryptRequest } = require("../../../middlewares/crypt");
 
 /**
  * @path                             - /api/beneficiary/ceiling

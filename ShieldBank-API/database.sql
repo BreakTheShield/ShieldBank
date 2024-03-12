@@ -5,27 +5,26 @@ use dvba;
 create table users
 (
     id             integer auto_increment,
-    username       varchar(100) UNIQUE          NOT NULL,
-    password       varchar(1024)                 NOT NULL,
-    phone          varchar(20) UNIQUE            NOT NULL,
-    account_number integer UNIQUE,
-    balance        BIGINT unsigned default 100000 NOT NULL,
+    username       varchar(100)  UNIQUE             NOT NULL,
+    password       varchar(1024)                    NOT NULL,
+    phone          varchar(20)   UNIQUE             NOT NULL,
+    account_number integer       UNIQUE,
+    balance        BIGINT unsigned default 100000   NOT NULL,
     is_admin       boolean         default false,
-    email          varchar(255)                  NOT NULL,
-    membership     varchar(255)                  NOT NULL,
+    email          varchar(255)                     NOT NULL,
+    membership     varchar(255)                     NOT NULL,
     is_loan        boolean     default false,
     is_mydata      boolean     default false,
     PRIMARY KEY (id, username)
 ) engine = innodb;
 
 create table loan
-(
-   id            integer PRIMARY KEY auto_increment,
-   username       varchar(100) UNIQUE          NOT NULL,
-   foreign key(username) references users(username),
-   loan_amount      BIGINT                    NOT NULL,
+(   
+    id            integer PRIMARY KEY auto_increment,
+    username       varchar(100) UNIQUE          NOT NULL,
+    foreign key(username) references users(username),
+    loan_amount      BIGINT                    NOT NULL,
     loan_time        DATETIME                    NOT NULL
-   
 ) engine = innodb;
 
 create table transactions

@@ -4,7 +4,7 @@ var Model = require('../../../models/index');
 var Response = require('../../Response');
 var statusCodes = require('../../statusCodes');
 var { validateUserToken } = require("../../../middlewares/validateToken");
-var { encryptResponse } = require("../../../middlewares/crypt");
+var { encryptResponse,decryptRequest } = require("../../../middlewares/crypt");
 
 /**
  * Beneficiary approve route
@@ -14,7 +14,7 @@ var { encryptResponse } = require("../../../middlewares/crypt");
  * @param id                         - ID to be approved
  * @return                           - Status
  */
-router.post('/', validateUserToken, (req, res) => {
+router.post('/', [validateUserToken,decryptRequest], (req, res) => {
     var r = new Response();
     let { account_number } = req;
     Model.beneficiaries.findAll({
@@ -25,7 +25,7 @@ router.post('/', validateUserToken, (req, res) => {
         attributes: ["beneficiary_account_number",]
     }).then((data) => {
         let arr = data.map((elem) => parseInt(elem.beneficiary_account_number));
-                       r.status = statusCodes.SUCCESS;
+                        r.status = statusCodes.SUCCESS;
                         r.data = {
                             "message": "Success",
                             "accountdata": arr

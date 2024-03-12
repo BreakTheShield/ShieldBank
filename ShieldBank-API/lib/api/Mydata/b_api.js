@@ -5,10 +5,10 @@ var Response = require('../../Response');
 var statusCodes = require('../../statusCodes');
 var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
 
-router.post('/', (req, res) => {          // A은행에서 마이데이터를 요청한 user가 B은행에 존재하는지 확인
+router.post('/',(req, res) => {          // A은행에서 마이데이터를 요청한 user가 B은행에 존재하는지 확인
     var r = new Response();
     const phone = req.body.phone;
-   
+    
     Model.users.findOne({          // select username, phone from users where phone = phone;
         where: {
             phone: phone

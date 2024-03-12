@@ -33,7 +33,7 @@ router.post('/', validateUserToken, (req, res) => {
             total[0].total_balance = Number(total[0].total_balance);
             total[0].total_balance = total[0].total_balance.toLocaleString();
             user.dataValues = Object.assign({}, user.dataValues, total[0]);          //pending에 total_balance도 추가해주는 것.
-            console.log(user);
+            //console.log(user);
             if (user) {          // user가 존재하는 경우
                 r.status = statusCodes.SUCCESS;
                 r.data = user;

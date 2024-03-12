@@ -4,7 +4,7 @@ var Model = require('../../../models/index');
 var Response = require('../../Response');
 var statusCodes = require('../../statusCodes');
 var { validateAdminToken } = require("../../../middlewares/validateToken");
-var { encryptResponse } = require("../../../middlewares/crypt");
+var { encryptResponse,decryptRequest } = require("../../../middlewares/crypt");
 
 /**
  * Beneficiary approve route
@@ -13,7 +13,7 @@ var { encryptResponse } = require("../../../middlewares/crypt");
  * @middleware                       - Checks admin authorization
  * @return                           - Status
  */
-router.post('/', validateAdminToken, (req, res) => {
+router.post('/', [validateAdminToken,decryptRequest], (req, res) => {
     var r = new Response();
 
     Model.beneficiaries.findAll({

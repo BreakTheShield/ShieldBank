@@ -4,7 +4,7 @@ var Model = require('../../../models/index');
 var Response = require('../../Response');
 var statusCodes = require('../../statusCodes');
 var { validateUserToken } = require("../../../middlewares/validateToken");
-var { encryptResponse } = require("../../../middlewares/crypt");
+var { encryptResponse,decryptRequest } = require("../../../middlewares/crypt");
 
 /**
  * Beneficiary approve route
@@ -14,7 +14,7 @@ var { encryptResponse } = require("../../../middlewares/crypt");
  * @param id                         - ID to be approved
  * @return                           - Status
  */
-router.post('/', validateUserToken, (req, res) => {          // from /trade_send.js
+router.post('/', [validateUserToken,decryptRequest], (req, res) => {          // from /trade_send.js
     var r = new Response();
     let username=req.body.username;
     
@@ -27,7 +27,7 @@ router.post('/', validateUserToken, (req, res) => {          // from /trade_send
 
         let arr = data.map((elem) => parseInt(elem.account_number));
 
-                       r.status = statusCodes.SUCCESS;
+                        r.status = statusCodes.SUCCESS;
                         r.data = {
                             "message": "Success",
                             "accountdata": arr

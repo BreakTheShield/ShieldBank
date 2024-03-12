@@ -10,7 +10,7 @@ var html_data_description = "<h3 align='center'> Mydata 서비스는 타은행�
 
 router.get('/', checkCookie, function (req, res) {          // 마이데이터(신청 전) 화면 불러오기
     const cookie = req.cookies.Token;
-    console.log(cookie);
+    //console.log(cookie);
     
     profile(cookie).then(profileData => {
         var is_mydata = profileData.data.is_mydata;

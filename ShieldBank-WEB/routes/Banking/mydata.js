@@ -8,7 +8,7 @@ const checkCookie = require("../../middlewares/checkCookie")
 router.get('/', checkCookie, function (req, res) {          // mydata 불러오기 요청하는 페이지
     const cookie = req.cookies.Token;
     profile(cookie).then(profileData => {
-        console.log("mydata에서의 profileData : ",profileData);
+        //console.log("mydata에서의 profileData : ",profileData);
 
         return res.render("Banking/mydata", {html_data: "<br/>", pending: profileData, select: "mydata"});
     });
@@ -22,9 +22,9 @@ router.post('/', checkCookie, function (req, res) {          // mydata 페이지
             url: api_url + "/api/mydata/req_account",
             headers: {"authorization": "1 " + cookie},
         }).then((data) => {
-           
+            
             var account_list = decryptRequest(data.data).data;
-            console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",account_list);
+            //console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",account_list);
             var result="";
 
             if(account_list.length > 0) {          // B은행에서 받아온 data(user 계좌정보)가 존재하는 경우

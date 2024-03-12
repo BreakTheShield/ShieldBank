@@ -8,13 +8,14 @@ var {seoultime} = require('../../middlewares/seoultime');
 
 router.get("/", checkCookie, async (req, res) => {          // 송금 기본 페이지 불러오기
     const cookie = req.cookies.Token;
-    
+
     profile(cookie).then((data) => {
+        const en_data = encryptResponse(JSON.stringify({username:data.data.username}));
         axios({          // 송금 페이지를 위한 api로 req 
             method: "post",
             url: api_url + "/api/beneficiary/account",
             headers: {"authorization": "1 " + cookie},
-            data:{username:data.data.username}
+            data:en_data
         }).then((data2) => {
             var d = decryptRequest((data2.data));
             var results = d.data.accountdata;

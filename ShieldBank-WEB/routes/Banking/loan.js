@@ -11,17 +11,18 @@ router.get('/', checkCookie, function (req, res, next) {          // 대출 페�
     const cookie = req.cookies.Token;
 
     profile(cookie).then(pending => {
+        const en_data = encryptResponse(JSON.stringify({username: pending.data.username}));
         axios({          // 대출 페이지 불러오기를 위한 api로 req
             method: "post",
             url: api_url + "/api/loan/loan",
             headers: {"authorization": "1 " + cookie},
-            data: {username: pending.data.username}
+            data: en_data
         }).then((data) => {
             let result_data = decryptRequest(data.data);
             let statusCode = result_data.status;
             let ac = result_data.data.account_number;
             let la = result_data.data.loan_amount;
-            console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", laFormatted);
+            //console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", laFormatted);
             if (statusCode.code == 200) {          // users 테이블에 사용자가 is_loan = true면,
                 var laFormatted = la.toLocaleString();
                 var html_data = `
@@ -115,11 +116,12 @@ router.post("/get_debt", checkCookie, function (req, res, next) {          // �
     let account_number = req.body.account_number;
     let loan_time = seoultime;
 
+    const en_data = encryptResponse(JSON.stringify({account_number:account_number,username: username, loan_amount: loan_amount, loan_time: loan_time}));
     axios({          // 대출 신청을 위한 api로 req
         method: "post",
         url: api_url + "/api/loan/get_debt",
         headers: {"authorization": "1 " + cookie},
-        data: {account_number:account_number,username: username, loan_amount: loan_amount, loan_time: loan_time}
+        data: en_data
     }).then((data) => {
         result = decryptRequest(data.data);
         statusCode = result.data.status;
@@ -145,12 +147,12 @@ router.post('/repayment', checkCookie, function (req, res, next) {          // �
     profile(cookie).then(pending => {
         let selected_account = req.body.selected_account;
         let repayment_amount = req.body.repayment_amount;
-
+        const en_data = encryptResponse(JSON.stringify({selected_account: selected_account, repayment_amount: repayment_amount, username: pending.data.username}));
         axios({          // 대출 상환을 위한 api로 req
             method: "post",
             url: api_url + "/api/loan/repayment",
             headers: {"authorization": "1 " + cookie},
-            data: {selected_account: selected_account, repayment_amount: repayment_amount, username: pending.data.username}
+            data: en_data
         }).then((data) => {
             result = decryptRequest(data.data);
             statusCode = result.data.status;
@@ -175,11 +177,12 @@ router.post('/cancel', checkCookie, function (req, res, next) {          // 대�
     const cookie = req.cookies.Token;
     let selected_account = req.body.selected_account;
     profile(cookie).then(pending => {
+        const en_data = encryptResponse(JSON.stringify({username: pending.data.username, selected_account: selected_account}));
         axios({          // 대출 취소를 위한 api로 req
             method: "post",
             url: api_url + "/api/loan/loan_cancel",
             headers: {"authorization": "1 " + cookie},
-            data: {username: pending.data.username, selected_account: selected_account }
+            data: en_data
         }).then((data) =>{
             result = decryptRequest(data.data);
             statusCode = result.data.status;

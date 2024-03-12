@@ -16,7 +16,7 @@ var { encryptResponse, decryptRequest} = require("../../../middlewares/crypt");
  * @param username
  * @return                           - Status
  */
-router.post('/', validateUserToken, (req, res) => {          // from /loan.js/get_debt
+router.post('/', [validateUserToken,decryptRequest], (req, res) => {          // from /loan.js/get_debt
     var r = new Response();
     let username = req.username;
     let loan_amount = req.body.loan_amount;

@@ -25,7 +25,7 @@ router.get('/', checkCookie, function (req, res) {          // account_list 페�
             }
             
             return res.render("Banking/account_list", {html: " " , html_data: result, pending: profileData, select: "account_list"});
-       
+        
         }).catch(function (error) {
 
             var html_data = "<tr>에러</tr>";
@@ -47,7 +47,7 @@ router.post('/create', checkCookie, function (req, res) {          // account_li
         }).then((data) => {          // 신규계좌가 성공적으로 생성된 경우
             
             var result = decryptRequest(data.data);
-            console.log("@@@@@@@@@@@@@@@@@@@@@@@@@",result);
+            //console.log("@@@@@@@@@@@@@@@@@@@@@@@@@",result);
             if(result.status.code == 200){
             var html_alert= `
                 <script>
@@ -67,7 +67,7 @@ router.post('/create', checkCookie, function (req, res) {          // account_li
             }
         }).catch(function (error) {
             var html_data = [
-                 { balance: error, account_number: error, bank_code: error }
+                { balance: error, account_number: error, bank_code: error }
             ];
 
             return res.render("Banking/account_list", {html : " " ,html_data: html_data, pending: profileData, select: "account_list"});

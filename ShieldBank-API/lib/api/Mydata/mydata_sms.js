@@ -12,7 +12,7 @@ var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
  * @middleware
  * @return
  */
-const test_api_url = "http://20.0.20.221:3000/api/mydata/b_api";
+const test_api_url = "https://shield-bank.com/api/mydata/b_api";
 
 function generateRandomVerificationCode() {          // 인증번호 랜덤 값 생성
     const min = 1000;
@@ -20,7 +20,7 @@ function generateRandomVerificationCode() {          // 인증번호 랜덤 값 
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-router.get('/',validateUserToken, (req,res)=>{          // 마이데이터 요청하기
+router.get('/', validateUserToken, (req,res)=>{          // 마이데이터 요청하기
     var r = new Response();
     var username = req.username;
     const coolsms = require('coolsms-node-sdk').default;
@@ -34,7 +34,6 @@ router.get('/',validateUserToken, (req,res)=>{          // 마이데이터 요�
 
         }, attributes:['phone']
     }).then((data)=>{  
-         
         var phone = data.dataValues.phone;
         axios({          // 마이데이터 요청을 한 유저가 B은행에 존재하는지 확인하는 요청
             method: "post",

@@ -4,7 +4,7 @@ var Model = require('../../../models/index');
 var Response = require('../../Response');
 var statusCodes = require('../../statusCodes');
 var { validateUserToken, tokenCheck } = require("../../../middlewares/validateToken");
-var { encryptResponse } = require("../../../middlewares/crypt");
+var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
 
 /**
  * Account view route
@@ -12,7 +12,7 @@ var { encryptResponse } = require("../../../middlewares/crypt");
  * @middleware
  * @return               
  */
-router.post('/', validateUserToken, (req, res) => {          
+router.post('/', [validateUserToken, decryptRequest], (req, res) => {          
     var r = new Response();
     Model.account.findAll({
         where: {

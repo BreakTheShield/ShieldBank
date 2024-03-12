@@ -5,6 +5,7 @@ const profile = require("../../middlewares/profile")
 const {decryptRequest, encryptResponse} = require("../../middlewares/crypt")
 const checkCookie = require("../../middlewares/checkCookie")
 var {seoultime} = require('../../middlewares/seoultime');
+const statusCodes = require('../../middlewares/statusCodes');
 
 
 router.get("/", checkCookie, async (req, res) => {          // 마이데이터 불러오기 계좌 송금 선택 시   
@@ -46,12 +47,10 @@ router.post("/post", checkCookie, function (req, res) {          // 마이데이
             headers: {"authorization": "1 " + cookie},
             data: en_data
         }).then((data) => {
-
+            
             result = decryptRequest(data.data);
-
-            statusCode = result.data.status;
+            statusCode = result.status.code;
             message = result.data.message;
-
             if(statusCode != 200) {          // 송금 거래가 정상적으로 이루어지지 않은 경우
                 
                 res.send(`<script>

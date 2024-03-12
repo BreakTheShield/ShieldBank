@@ -4,7 +4,7 @@ var Model = require('../../../models/index');
 var Response = require('../../Response');
 var statusCodes = require('../../statusCodes');
 var { validateUserToken } = require("../../../middlewares/validateToken");
-var { encryptResponse, } = require("../../../middlewares/crypt");
+var { encryptResponse,decryptRequest } = require("../../../middlewares/crypt");
 
 /**
  * Beneficiary approve route
@@ -13,7 +13,7 @@ var { encryptResponse, } = require("../../../middlewares/crypt");
  * @middleware                       - Checks admin authorization
  * @return                           - Status
  */
-router.post('/', validateUserToken, (req, res) => {          // from /loan
+router.post('/', [validateUserToken,decryptRequest], (req, res) => {          // from /loan
     var r = new Response();
     let username = req.username;
     Model.users.findAll({          // select username from users where username = username and is_loan = true;        

@@ -5,7 +5,7 @@ const Sequelize = require("sequelize");
 var Response = require('../../Response');
 var statusCodes = require('../../statusCodes');
 var { validateUserToken } = require("../../../middlewares/validateToken");
-var { encryptResponse, } = require("../../../middlewares/crypt");
+var { encryptResponse,decryptRequest } = require("../../../middlewares/crypt");
 /**
  * Beneficiary approve route
  * This endpoint allows to view is_loan of any user
@@ -13,7 +13,7 @@ var { encryptResponse, } = require("../../../middlewares/crypt");
  * @middleware                       - Checks admin authorization
  * @return                           - Status
  */
-router.post('/', validateUserToken, (req, res) => {          // from /loan.js/repayment
+router.post('/', [validateUserToken,decryptRequest], (req, res) => {          // from /loan.js/repayment
     var r = new Response();
     let account_number = req.body.selected_account;
     let repayment_amount = req.body.repayment_amount;

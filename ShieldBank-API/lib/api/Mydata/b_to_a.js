@@ -7,7 +7,7 @@ var statusCodes = require('../../statusCodes');
 var { validateUserToken } = require("../../../middlewares/validateToken");
 var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
 const axios = require('axios');
-const apiUrl = 'http://20.0.20.221:3000/api/mydata/send_btoa';
+const apiUrl = 'https://shield-bank.com/api/mydata/send_btoa';
 
 /**
  * Balance transfer route
@@ -17,7 +17,7 @@ const apiUrl = 'http://20.0.20.221:3000/api/mydata/send_btoa';
  * @param amount         - Amount to be transferred
  * @return               - Status
  */
-router.post('/', [validateUserToken, decryptRequest], (req, res) => {          // B은행 계좌에서 A은행 계좌로 송금하는 경우
+router.post('/', [validateUserToken,decryptRequest], (req, res) => {          // B은행 계좌에서 A은행 계좌로 송금하는 경우
     var r = new Response();
     let from_account = req.body.from_account;
     let to_account = req.body.to_account;
@@ -45,7 +45,8 @@ router.post('/', [validateUserToken, decryptRequest], (req, res) => {          /
                     url: apiUrl,
                     data: { from_account: from_account, amount: amount, bank_code: bank_code, to_account: to_account, sendtime: sendtime, username: username }
                 }).then((data) => {
-                    if (data.data.status.code == 200) {
+                    if (data.status == 200) {
+                        
                         Model.account.update({
                             balance: Sequelize.literal(`balance + ${amount}`)
                         }, {
@@ -53,6 +54,7 @@ router.post('/', [validateUserToken, decryptRequest], (req, res) => {          /
                                 account_number: to_account
                             }
                         }).then(() => {
+                            
                             Model.transactions.create({
                                 from_account: from_account,
                                 to_account: to_account,
@@ -61,6 +63,7 @@ router.post('/', [validateUserToken, decryptRequest], (req, res) => {          /
                                 from_bankcode: 333,
                                 to_bankcode: bank_code
                             }).then(() => {
+
                                 r.status = statusCodes.SUCCESS;
                                 r.data = {
                                     "message": "송금에 성공했습니다."
@@ -71,7 +74,7 @@ router.post('/', [validateUserToken, decryptRequest], (req, res) => {          /
                             r.status = statusCodes.SERVER_ERROR;
                             r.data = {
                                 "message": "송금에 실패했습니다."
-                             };
+                            };
                             return res.json(encryptResponse(r));
                         });
                     } else {
@@ -83,10 +86,10 @@ router.post('/', [validateUserToken, decryptRequest], (req, res) => {          /
                     }
                 }).catch((err) => {
                     r.status = statusCodes.SERVER_ERROR;
-            r.data = {
-                "message": "송금에 실패했습니다."
-            };
-            return res.json(encryptResponse(r));
+                    r.data = {
+                        "message": "송금에 실패했습니다."
+                    };
+                    return res.json(encryptResponse(r));
                 });
             } else {
                 // to_account가 데이터베이스에 존재하지 않는 경우
