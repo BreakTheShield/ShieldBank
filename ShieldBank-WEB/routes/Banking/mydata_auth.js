@@ -80,14 +80,13 @@ router.post('/', checkCookie, function (req, res) {          // 마이데이터(
 router.post('/authnum', checkCookie, function (req, res) {          // user에게 인증번호 입력을 받음
     const cookie = req.cookies.Token;
     let authnum = req.body.authnum;
+    const en_data = encryptResponse(JSON.stringify({authnum: authnum}));
     profile(cookie).then(profileData => {
         axios({          // user에게 입력받은 인증번호 확인요청
             method: "post",
             url: api_url + "/api/Mydata/mydata_sms",
             headers: {"authorization": "1 " + cookie},
-            data: {
-                authnum: authnum
-            }
+            data: en_data
         }).then((smsdata)=>{
             var result = decryptRequest(smsdata.data);
 

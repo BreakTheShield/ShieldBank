@@ -114,7 +114,7 @@ router.get('/', validateUserToken, (req,res)=>{          // 마이데이터 요�
 });
 
 
-router.post('/', [validateUserToken], (req, res) => {          // user가 보낸 인증번호 수신
+router.post('/', [validateUserToken, decryptRequest], (req, res) => {          // user가 보낸 인증번호 수신
     var r = new Response();
     var username = req.username;
     var authnum = req.body.authnum;
