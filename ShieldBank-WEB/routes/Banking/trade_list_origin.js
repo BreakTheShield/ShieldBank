@@ -18,10 +18,6 @@ min="2023-01-01" max="${simpletime}">&nbsp;&nbsp;
 
 router.get("/", checkCookie, async (req, res) => {          // 입출금 내역 초기 페이지 불러오기
     const cookie = req.cookies.Token;
-     const tripstart = '1998-02-20 00:00:00';
-	    const tripend = simpletime;
-	    const basedata = `{"tripstart": "${tripstart}", "tripend":"${tripend}"}`;
-	    const enData = encryptResponse(basedata);
     profile(cookie).then((data) => {
             axios({          // 입출금 내역 요청을 위한 api로 req
                 method: "post",
@@ -29,7 +25,10 @@ router.get("/", checkCookie, async (req, res) => {          // 입출금 내역 
                 headers: {
                     "authorization": "1 " + cookie
                 },
-                data: enData
+                data: {          // 초기 검색을 위한 기간
+                    tripstart: '1998-02-20 00:00:00',
+                    tripend: simpletime
+                },
             }).then((data2) => {
                 if(data2){          // 날짜 검색 api에서 data2가 있으면,
                 var get_html = null
@@ -64,8 +63,6 @@ router.post("/", checkCookie, async (req, res) => {          // 입출금 내역
     const cookie = req.cookies.Token;
     var bt= req.body.tripstart;
     var be= req.body.tripend;
-    const basedata = `{"tripstart": "${bt}", "tripend":"${be}"}`;
-    const enData = encryptResponse(basedata);
    
     profile(cookie).then((data) => {
         axios({          // 입출금 내역 요청을 위한 api로 req
@@ -74,7 +71,10 @@ router.post("/", checkCookie, async (req, res) => {          // 입출금 내역
             headers: {
                 "authorization": "1 " + cookie
             },
-            data: enData
+            data: { // 요청한 기간
+                tripstart: bt,
+                tripend: be
+            },
         }).then((data2) => {
             var post_html = null
             post_html = html_data;

@@ -5,7 +5,7 @@ var Response = require("../../Response");
 var statusCodes = require("../../statusCodes");
 var { validateUserToken } = require("../../../middlewares/validateToken");
 const { Op } = require("sequelize");
-var { encryptResponse } = require("../../../middlewares/crypt");
+var { encryptResponse,decryptRequest } = require("../../../middlewares/crypt");
 /**
  * Transactions viewing route
  * This endpoint allows to view all transactions of authorized user
@@ -38,11 +38,13 @@ router.post("/", validateUserToken, (req, res) => {
         });
 });
 
-router.post("/search", validateUserToken, async (req, res) => {
+router.post("/search", [validateUserToken,decryptRequest], async (req, res) => {
     var r = new Response();
     let username = req.username;
     const startDate = req.body.tripstart;
     const endDate = req.body.tripend + " 23:59:59";
+	console.log("startDate : ",startDate);
+	        console.log("endDate : ",endDate);
     try{
     const results = await Model.sequelize.query(     //username 받아서 해당 username으로 account 테이블에서 List 뽑아서, 해당 transactions에서 뽑아오는걸로.
          `

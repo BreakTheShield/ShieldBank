@@ -32,7 +32,7 @@ const upload = multer({
     storage: multer.diskStorage({
         destination: function (req, file, cb) {          // 파일 저장 위치를 ../file 디렉토리에 저장
             console.log(req.body.fid);
-            cb(null, "C:\\Users\\user\\Documents\\GitHub\\AWS-ShieldBank\\ShieldBank-WEB\\file");
+            cb(null, "../file");
         },
         filename: function (req, file, cb) {          // 파일 이름을 upload한 이름 그대로 사용
             cb(null, file.originalname);

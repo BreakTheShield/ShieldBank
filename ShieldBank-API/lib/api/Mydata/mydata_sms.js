@@ -12,7 +12,7 @@ var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
  * @middleware
  * @return
  */
-const test_api_url = "https://shield-bank.com/api/mydata/b_api";
+const test_api_url = "http://20.0.22.40:3000/api/mydata/b_api";
 
 function generateRandomVerificationCode() {          // 인증번호 랜덤 값 생성
     const min = 1000;

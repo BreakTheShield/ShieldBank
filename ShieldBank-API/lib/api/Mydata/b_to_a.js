@@ -7,7 +7,7 @@ var statusCodes = require('../../statusCodes');
 var { validateUserToken } = require("../../../middlewares/validateToken");
 var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
 const axios = require('axios');
-const apiUrl = 'https://shield-bank.com/api/mydata/send_btoa';
+const apiUrl = 'http://20.0.22.40:3000/api/mydata/send_btoa';
 
 /**
  * Balance transfer route
