@@ -1,14 +1,16 @@
 <%- include("_header") -%>
 <br>
-<form action="/data" method="get" style="display: inline;">
+<form action="/notice" method="get" style="display: inline;">
   <input type="hidden" name="menu" value="안내사항">
   <button type="submit" class="btn btn-sm btn-warning">안내사항</button>
 </form>
-<form action="/data" method="get" style="display: inline;">
+<form action="/notice" method="get" style="display: inline;">
   <input type="hidden" name="menu" value="회사내규">
   <button type="submit" class="btn btn-sm btn-warning">회사내규</button>
 </form>
 <br><br>
+
+<!-- 클릭 했을 때 파라미터 출력 -->
 <% if (typeof menu !== 'undefined') { %>
   <h3><%= menu %></h3>
 

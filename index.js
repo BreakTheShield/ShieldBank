@@ -73,14 +73,22 @@ app.listen(port, function() {
 
 
 
-//function 추가
-app.get("/about", (req, res) => {
-  res.render("about");
-});
+app.get("/notice", (req, res) => {
+  // 기본적으로 menu가 없을 때는 '안내사항'으로 설정
+  const menu = req.query.menu || '안내사항';
+  
+  // 현재 요청 URL이 이미 menu 쿼리 매개변수를 포함하고 있는지 확인
+  const currentUrlHasMenuParam = req.url.includes('menu=');
 
-app.get("/data", (req, res) => {
+  if (!currentUrlHasMenuParam) {
+    // 현재 요청 URL에 menu 쿼리 매개변수가 포함되어 있지 않다면
+    // menu 쿼리 매개변수를 추가하여 리디렉션
+    return res.redirect(`/notice?menu=${encodeURIComponent(menu)}`);
+  }
 
-  res.render("data", req.query);
+  // 현재 요청 URL이 menu 쿼리 매개변수를 포함하고 있다면
+  // 추가적인 리디렉션 없이 그대로 렌더링
+  res.render("notice", { menu });
 });
 
 // 첫번째 파라미터 "/"에 전달된 HTTP GET request에 응답
@@ -98,7 +106,7 @@ app.get("/emp", (req, res) => {
     if(err) {
       return console.error(err.message);
     }
-    res.render("book", {model: rows, sname: name });
+    res.render("employee", {model: rows, sname: name });
   });
 });
 
@@ -123,7 +131,7 @@ app.get("/search", (req, res)=> {
     if (err) {
       return console.error(err.message);
     }
-    res.render('book', {model: rows});
+    res.render('employee', {model: rows});
     
   });
 });
@@ -134,9 +142,9 @@ app.get("/search", (req, res)=> {
 // app.use()를 통해 수행할 수 있다.
 app.post("/edit/:id", (req, res)=>{
   const id = req.params.id;
-  const book = [req.body.Title, req.body.Author, req.body.Comments, id];
-  const sql = "UPDATE emp SET Title=?, Author=?, Comments=? WHERE (Book_ID = ?)";
-  db.run(sql, book, err=> {
+  const employee = [req.body.Name, req.body.Dept, id];
+  const sql = "UPDATE emp SET Name=?, Dept=? WHERE (employee_ID = ?)";
+  db.run(sql, employee, err=> {
     if(err) {
       console.error(err.message);
     }
@@ -150,9 +158,9 @@ app.get("/create", (req, res)=>{
 
 
 app.post("/create", (req, res)=>{
-  const book = [req.body.Title, req.body.Author, req.body.Comments];
-  const sql = "INSERT INTO emp (Title, Author, Comments) VALUES (?, ?, ?)";
-  db.run(sql, book, err=> {
+  const employee = [req.body.Name, req.body.Dept, req.body.Comments];
+  const sql = "INSERT INTO emp (Name, Dept) VALUES (?, ?)";
+  db.run(sql, employee, err=> {
     if(err){
       console.error(err.message);
     }
