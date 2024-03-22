@@ -88,11 +88,12 @@ app.get("/notice", (req, res) => {
 
   // 현재 요청 URL이 menu 쿼리 매개변수를 포함하고 있다면
   // 추가적인 리디렉션 없이 그대로 렌더링
-  res.render("notice", { menu });
+  res.render("notice", req.query);
 });
 
 // 첫번째 파라미터 "/"에 전달된 HTTP GET request에 응답
 app.get('/', (req, res) => {
+  
   res.render('index');
 });
 
