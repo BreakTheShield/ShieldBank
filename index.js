@@ -75,7 +75,7 @@ app.listen(port, function() {
 
 app.get("/notice", (req, res) => {
   // 기본적으로 menu가 없을 때는 '안내사항'으로 설정
-  const menu = req.query.menu || '안내사항';
+  const menu = req.query.menu || '회사내규';
   
   // 현재 요청 URL이 이미 menu 쿼리 매개변수를 포함하고 있는지 확인
   const currentUrlHasMenuParam = req.url.includes('menu=');
@@ -93,8 +93,16 @@ app.get("/notice", (req, res) => {
 
 // 첫번째 파라미터 "/"에 전달된 HTTP GET request에 응답
 app.get('/', (req, res) => {
-  
   res.render('index');
+});
+
+
+app.get('/empLogin', (req, res) => {
+  res.render('empLogin');
+});
+
+app.get('/login', (req, res) => {
+  res.redirect('login')
 });
 
 app.get("/emp", (req, res) => {
