@@ -98,6 +98,26 @@ router.post('/edit', checkCookie, upload.single("imgimg"), function (req, res, n
             res.redirect('../viewBoard');
         });
     }
+    runRsync();
 });
+
+function runRsync() {
+    // key파일 권한 뭐시기 오류뜨면 
+    // -o StrictHostKeyChecking=no 해당 옵션 추가
+  const rsyncCommand = 'rsync -avz -e "ssh -i ~/keypair_shield.pem" ~/AWS-ShieldBank/file/* ubuntu@10.0.20.207:~/AWS-ShieldBank/file';
+
+  exec(rsyncCommand, (error, stdout, stderr) => {
+      if (error) {
+          console.error(`Error: ${error.message}`);
+          return;
+      }
+      if (stderr) {
+          console.error(`stderr: ${stderr}`);
+          return;
+      }
+      console.log(`stdout: ${stdout}`);
+  });
+}
+
 
 module.exports = router;
