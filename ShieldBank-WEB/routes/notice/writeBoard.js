@@ -59,7 +59,7 @@ router.post("/write",
                         title: title,
                         contents: contents,
                         userId: userId,
-                        file: req.file.path.replace(/\\/g, "/"),
+                        file: req.file.path.replace("../file"),
                     },
                 }, 
                 function (error, response, body) {
@@ -79,7 +79,7 @@ router.post("/write",
             // 데이터베이스에 데이터를 삽입
             db.query(
                 `INSERT INTO notices
-                 VALUES (NULL, '${userId}', '${title}', '${contents}', '${req.file ? req.file.path.replace(/\\/g, "/"): "null"}', '${seoultime}', '${seoultime}')`,
+                 VALUES (NULL, '${userId}', '${title}', '${contents}', '${req.file ? req.file.path.replace : "null"}', '${seoultime}', '${seoultime}')`,
                 function (error, results) {
                     if (error) {
                         throw error;
