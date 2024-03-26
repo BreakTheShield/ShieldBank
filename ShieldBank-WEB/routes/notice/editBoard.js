@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 var tokenauth = require('./tokenauth');
 var {decryptEnc} = require("../../middlewares/crypt");
+var {exec} = require("child_process");
 const profile = require('../../middlewares/profile');
 const multer = require('multer')
 const checkCookie = require("../../middlewares/checkCookie")
