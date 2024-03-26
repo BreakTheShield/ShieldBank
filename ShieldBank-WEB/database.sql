@@ -5,35 +5,37 @@ use dvba;
 create table users
 (
     id             integer auto_increment,
-    username       varchar(100) UNIQUE          NOT NULL,
-    password       varchar(1024)                 NOT NULL,
-    phone          varchar(20) UNIQUE            NOT NULL,
-    account_number integer UNIQUE,
-    balance        BIGINT unsigned default 100000 NOT NULL,
+    username       varchar(100)  UNIQUE             NOT NULL,
+    password       varchar(1024)                    NOT NULL,
+    phone          varchar(20)   UNIQUE             NOT NULL,
+    account_number integer       UNIQUE,
+    balance        BIGINT unsigned default 1000000   NOT NULL,
     is_admin       boolean         default false,
-    email          varchar(255)                  NOT NULL,
-    membership     varchar(255)                  NOT NULL,
+    email          varchar(255)                     NOT NULL,
+    membership     varchar(255)                     NOT NULL,
     is_loan        boolean     default false,
+    is_mydata      boolean     default false,
     PRIMARY KEY (id, username)
 ) engine = innodb;
 
 create table loan
-(
-   id            integer PRIMARY KEY auto_increment,
-   username       varchar(100) UNIQUE          NOT NULL,
-   foreign key(username) references users(username),
-   loan_amount      BIGINT                    NOT NULL,
-   loan_time        DATETIME                  NOT NULL
-   
+(   
+    id            integer PRIMARY KEY auto_increment,
+    username       varchar(100) UNIQUE          NOT NULL,
+    foreign key(username) references users(username),
+    loan_amount      BIGINT                    NOT NULL,
+    loan_time        DATETIME                    NOT NULL
 ) engine = innodb;
 
 create table transactions
 (
-    id           integer PRIMARY KEY auto_increment,
-    from_account int(11)     NOT NULL,
-    to_account   VARCHAR(50) NOT NULL,
-    amount       int         NOT NULL,
-    sendtime     DATETIME
+    id              integer PRIMARY KEY auto_increment,
+    from_account    int(11)     NOT NULL,
+    from_bankcode   int       NOT NULL,
+    to_account      VARCHAR(50) NOT NULL,
+    to_bankcode     int        NOT NULL,
+    amount          int         NOT NULL,
+    sendtime        DATETIME
 ) engine = innodb;
 
 create table beneficiaries
@@ -51,11 +53,21 @@ create table smsauths
     authnum                    integer
 ) engine = innodb;
 
-INSERT INTO `users`
-values (default, "admin", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", "01011111111" , 999999, default, true,
-        'admin@admin', "ADMIN", default);
+create table account
+(
+    account_number             integer  PRIMARY KEY,
+    bank_code                  integer  NOT NULL,
+    username                   varchar(100) NOT NULL,
+    balance                    BIGINT  NOT NULL
+) engine = innodb;
 
-UPDATE users SET balance=100000000 WHERE username = 'vipuser';
+INSERT INTO `users`
+values (default, "admin", "edfb2fa1462f68627350058583fed9f5fcb4da78769f2cc42230f78cad50f81b", "01099999999" , 999999, default, true,
+        'admin@admin', "ADMIN", default, default);
+
+INSERT INTO `account`
+values (999999, 555, "admin", 100000000);
+
 
 drop database if exists board;
 create database if not exists board;
@@ -88,8 +100,8 @@ create table qnas
 drop user if exists api@'%';
 drop user if exists web@'%';
 
-create user api@'%' identified by 'eggmoneyapi';
-create user web@'%' identified by 'eggwebmoney';
+create user api@'%' identified by 'shieldapi';
+create user web@'%' identified by 'shieldbank';
 
 grant all privileges on dvba.* to api@'%';
 grant all privileges on board.* to web@'%';
