@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get("/", (req, res) => {
-    const url = req.query.url
+    const url = "../file/"+req.query.url
     //apidownurl = "http://127.0.0.1:3001/routes/notice/download?filename=" + url 
     //res.redirect(apidownurl)          // file이 존재하는 api로 redirect 진행
     // const filename = req.query.filename;
