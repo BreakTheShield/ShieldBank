@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:text="º 국X은행\nº 우X은행\nº 기X은행\nº 농X은행" />
+                android:text="º 국X뱅크\nº 우X뱅크\nº 기X뱅크\nº 농X뱅크" />
 
             <TextView
                 android:layout_width="match_parent"

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- 왼쪽 그룹: 송금은행과 송금계좌 -->
+        <!-- 왼쪽 그룹: 송금뱅크과 송금계좌 -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
                 android:id="@+id/text_view_transaction_sender_bank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="송금은행"
+                android:text="송금뱅크"
                 android:layout_marginLeft="15dp"
                 android:textColor="@color/black"
                 android:textSize="15dp" />
@@ -58,7 +58,7 @@
 
         </LinearLayout>
 
-        <!-- 오른쪽 그룹: 수취은행과 수취계좌 -->
+        <!-- 오른쪽 그룹: 수취뱅크과 수취계좌 -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                 android:id="@+id/text_view_transaction_receiver_bank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="수취은행"
+                android:text="수취뱅크"
                 android:layout_marginRight="15dp"
                 android:textColor="@color/black"
                 android:textSize="15dp" />

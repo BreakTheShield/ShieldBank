@@ -47,24 +47,24 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             sendtime = sendtime.replace("T", " ");
             sendtime = sendtime.replaceAll("\\.\\d{3}Z", "");
 
-            //송금은행
+            //송금뱅크
             String from_bankcode = transactionData.getString("from_bankcode");
             if(from_bankcode.equals("333")){
-                from_bankcode = "송금은행 : 소드은행";
+                from_bankcode = "송금뱅크 : 소드뱅크";
             }else if(from_bankcode.equals("555")){
-                from_bankcode = "송금은행 : 쉴드은행";
+                from_bankcode = "송금뱅크 : 쉴드뱅크";
             }
 
             //송금계좌
             String from_account = transactionData.getString("from_account");
             from_account = "송금계좌 :" + from_account;
 
-            //수취은행
+            //수취뱅크
             String to_bankcode = transactionData.getString("to_bankcode");
             if(to_bankcode.equals("333")){
-                to_bankcode = "수취은행 : 소드은행";
+                to_bankcode = "수취뱅크 : 소드뱅크";
             }else if(to_bankcode.equals("555")){
-                to_bankcode = "수취은행 : 쉴드은행";
+                to_bankcode = "수취뱅크 : 쉴드뱅크";
             }
 
             //수취계좌

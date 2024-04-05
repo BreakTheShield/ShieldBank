@@ -1,13 +1,18 @@
 package com.app.shieldbank;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +39,23 @@ import java.util.Map;
 
 public class Mypage extends AppCompatActivity {
 
+    public void resetPassword(View view){
+        // "Back" 버튼을 클릭하면 호출되는 메서드
+        // MainActivity로 이동
+        Intent into =new Intent(Mypage.this, ResetPassword.class);
+        startActivity(into);
+        finish();
+    }
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // 뒤로가기 버튼이 눌렸을 때의 동작 추가
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +69,11 @@ public class Mypage extends AppCompatActivity {
         final CardView cv_mem = findViewById(R.id.cv_membership);
         final TextView tv_mem_s=findViewById(R.id.tv_membership_small);
         final TextView tv_mem_b=findViewById(R.id.tv_membership_big);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        // 툴바에 뒤로가기 버튼 표시
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         try {

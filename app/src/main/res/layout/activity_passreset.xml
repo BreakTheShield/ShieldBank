@@ -6,11 +6,12 @@
     android:layout_height="match_parent"
     android:padding="30dp"
     tools:context=".ResetPassword"
-    android:background="#EED9F6">
+    android:background="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="vertical">
 
     <ImageView
@@ -45,14 +46,14 @@
             android:layout_height="match_parent"
             android:layout_below="@id/login_back"
             android:hint="현재 비밀번호"
-            android:textColorHint="#000000"
-            app:boxStrokeColor="#000000"
+            android:textColorHint="#FFFFFF"
+            app:boxStrokeColor="#FFFFFF"
             app:boxStrokeWidthFocused="2dp"
             app:endIconMode="clear_text"
-            app:endIconTint="#000000"
-            app:hintTextColor="#000000"
+            app:endIconTint="#FFFFFF"
+            app:hintTextColor="#FFFFFF"
             app:startIconDrawable="@android:drawable/ic_lock_lock"
-            app:startIconTint="#000000">
+            app:startIconTint="#FFFFFF">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/oldlogin_password_editText"
@@ -60,9 +61,9 @@
                 android:layout_height="55dp"
                 android:fontFamily="@font/muli_extrabold"
                 android:inputType="textPassword"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textCursorDrawable="@null"
-                android:background="@drawable/input_white"/>
+                android:background="@color/purple_200"/>
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -73,14 +74,14 @@
             android:layout_height="match_parent"
             android:layout_below="@id/login_back"
             android:hint="새 비밀번호"
-            android:textColorHint="#000000"
-            app:boxStrokeColor="#000000"
+            android:textColorHint="#FFFFFF"
+            app:boxStrokeColor="#FFFFFF"
             app:boxStrokeWidthFocused="2dp"
             app:endIconMode="clear_text"
-            app:endIconTint="#000000"
-            app:hintTextColor="#000000"
+            app:endIconTint="#FFFFFF"
+            app:hintTextColor="#FFFFFF"
             app:startIconDrawable="@android:drawable/ic_lock_lock"
-            app:startIconTint="#000000"
+            app:startIconTint="#FFFFFF"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -89,9 +90,9 @@
                 android:layout_height="55dp"
                 android:fontFamily="@font/muli_extrabold"
                 android:inputType="textPassword"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textCursorDrawable="@null"
-                android:background="@drawable/input_white"/>
+                android:background="@color/purple_200"/>
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -102,14 +103,14 @@
             android:layout_height="match_parent"
             android:layout_below="@id/login_back"
             android:hint="새 비밀번호(확인)"
-            android:textColorHint="#000000"
-            app:boxStrokeColor="#000000"
+            android:textColorHint="#FFFFFF"
+            app:boxStrokeColor="#FFFFFF"
             app:boxStrokeWidthFocused="2dp"
             app:endIconMode="clear_text"
-            app:endIconTint="#000000"
-            app:hintTextColor="#000000"
+            app:endIconTint="#FFFFFF"
+            app:hintTextColor="#FFFFFF"
             app:startIconDrawable="@android:drawable/ic_lock_lock"
-            app:startIconTint="#000000">
+            app:startIconTint="#FFFFFF">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/new1login_password_editText"
@@ -117,9 +118,9 @@
                 android:layout_height="55dp"
                 android:fontFamily="@font/muli_extrabold"
                 android:inputType="textPassword"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textCursorDrawable="@null"
-                android:background="@drawable/input_white"/>
+                android:background="@color/purple_200"/>
 
 
         </com.google.android.material.textfield.TextInputLayout>

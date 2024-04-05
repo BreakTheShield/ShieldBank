@@ -1,5 +1,5 @@
 package com.app.shieldbank;
-// 은행 뭐쓴다..
+// 뱅크 뭐쓴다..
 
 import androidx.appcompat.app.AppCompatActivity;
 

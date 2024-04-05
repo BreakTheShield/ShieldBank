@@ -7,7 +7,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_200"
+        app:titleTextColor="@android:color/white"
+        app:navigationIcon="?android:attr/homeAsUpIndicator" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_mymy"
@@ -119,7 +125,7 @@
                 android:id="@+id/cv_membership"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="7dp"
+                android:layout_marginBottom="5dp"
                 app:cardUseCompatPadding="true"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="3dp">
@@ -168,7 +174,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
+                android:layout_margin="8dp"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:text="등급안내" />
@@ -295,7 +301,17 @@
 
             </TableLayout>
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_margin="5dp"
+                style="@style/AppButton"
+                android:text="비밀번호 변경"
+                android:onClick="resetPassword" />
+
         </LinearLayout>
+
 
 
     </LinearLayout>

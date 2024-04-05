@@ -62,7 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
-                    android:text="은행"
+                    android:text="뱅크"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
             </LinearLayout>

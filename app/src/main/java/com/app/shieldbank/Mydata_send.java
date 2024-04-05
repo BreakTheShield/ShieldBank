@@ -69,9 +69,13 @@ public class Mydata_send extends AppCompatActivity {
 
     private void reqAccounts()
     {
+        SharedPreferences sharedPreferences = getSharedPreferences("jwt", Context.MODE_PRIVATE);
+
+
+
         OkHttpClient client2 = new OkHttpClient();
         EncryptDecrypt endecryptor2 = new EncryptDecrypt();
-        SharedPreferences sharedPreferences = Mydata_send.this.getSharedPreferences("jwt", Context.MODE_PRIVATE);
+    //    SharedPreferences sharedPreferences = Mydata_send.this.getSharedPreferences("jwt", Context.MODE_PRIVATE);
         final String retrivedToken2  = sharedPreferences.getString("accesstoken",null);
 
         String apiUrl2 = "https://m.shield-bank.com/api/Mydata/req_account";
@@ -155,7 +159,7 @@ public class Mydata_send extends AppCompatActivity {
                     bankAccount.setBalance(jsonObject.getInt("balance"));
                     bankAccount.setAccount_number(jsonObject.getInt("account_number"));
                     if(jsonObject.getInt("bank_code")==555) {
-                        bankAccount.setBank_code("실드뱅크");
+                        bankAccount.setBank_code("쉴드뱅크");
                     }
                     else if(jsonObject.getInt("bank_code")==333)
                         bankAccount.setBank_code("소드뱅크");

@@ -138,8 +138,14 @@ public class AccountListFragment extends Fragment {
                             // 포맷을 적용하여 문자열로 변환
                             String formattedBalance = formatter.format(balanceValue);
 
+                            try {
+                                Thread.sleep(300); // 1000 밀리초 = 1초
+                                text_view_total_money.setText(formattedBalance);
+                                // 1초 후에 실행될 코드 작성
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
 
-                            text_view_total_money.setText(formattedBalance);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -240,7 +246,7 @@ public class AccountListFragment extends Fragment {
                     bankAccount.setBalance(jsonObject.getInt("balance"));
                     bankAccount.setAccount_number(jsonObject.getInt("account_number"));
                     if(jsonObject.getInt("bank_code")==555) {
-                        bankAccount.setBank_code("실드뱅크");
+                        bankAccount.setBank_code("쉴드뱅크");
                     }
                     else if(jsonObject.getInt("bank_code")==333)
                         bankAccount.setBank_code("소드뱅크");

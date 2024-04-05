@@ -251,21 +251,21 @@ public class Mydata_sendMoney extends AppCompatActivity {
     private int getSelectedBankCode() {
         Spinner spinnerBank = findViewById(R.id.spinnerBank);
 
-        // 선택된 은행의 위치(index)를 가져옴
+        // 선택된 뱅크의 위치(index)를 가져옴
         int selectedPosition = spinnerBank.getSelectedItemPosition();
 
-        // 선택된 은행 옵션의 배열에서 해당 위치의 문자열을 가져옴
+        // 선택된 뱅크 옵션의 배열에서 해당 위치의 문자열을 가져옴
         String[] bankOptions = getResources().getStringArray(R.array.bank_options);
         String selectedBank = bankOptions[selectedPosition];
 
-        // 선택된 은행에 따라 코드를 할당하거나 다른 처리를 수행
+        // 선택된 뱅크에 따라 코드를 할당하거나 다른 처리를 수행
         int to_bankcode = 0;
-        if ("쉴드은행".equals(selectedBank)) {
-            to_bankcode = 555; // 예시 코드, 실제 은행 코드에 따라 수정
-        } else if ("소드은행".equals(selectedBank)) {
-            to_bankcode = 333; // 예시 코드, 실제 은행 코드에 따라 수정
+        if ("쉴드뱅크".equals(selectedBank)) {
+            to_bankcode = 555; // 예시 코드, 실제 뱅크 코드에 따라 수정
+        } else if ("소드뱅크".equals(selectedBank)) {
+            to_bankcode = 333; // 예시 코드, 실제 뱅크 코드에 따라 수정
         }
-        // 다른 은행에 대한 처리도 추가 가능
+        // 다른 뱅크에 대한 처리도 추가 가능
 
         return to_bankcode;
     }
