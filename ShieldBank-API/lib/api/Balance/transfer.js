@@ -53,7 +53,7 @@ router.post('/', [validateUserToken, decryptRequest], (req, res) => {          /
         }).then((data) => {
 
             if(data.membership === "SILVER") {          // 멤버십이 실버면,
-                if(amount >= 1000000) {          // 입력값이 1000000보다 크거나 같으면,
+                if(amount > 1000000) {          // 입력값이 1000000보다 크거나 같으면,
                     r.status = statusCodes.BAD_INPUT;
                     r.data = {
                         "message": "송금 한도 초과입니다."
@@ -133,7 +133,7 @@ router.post('/', [validateUserToken, decryptRequest], (req, res) => {          /
             }
 
             else if(data.membership === "GOLD"){          // 멤버십이 골드면,
-                if(amount >= 10000000){          // 입력값이 10000000보다 크거나 같으면,
+                if(amount > 10000000){          // 입력값이 10000000보다 크거나 같으면,
                     r.status = statusCodes.BAD_INPUT;
                     r.data = {
                         "message": "송금 한도 초과입니다."
@@ -213,7 +213,7 @@ router.post('/', [validateUserToken, decryptRequest], (req, res) => {          /
             }
 
             else if(data.membership === "PLATINUM"){          // 멤버십이 플래티넘이면,
-                if(amount >= 100000000){          // 입력값이 100000000보다 크거나 같으면,
+                if(amount > 100000000){          // 입력값이 100000000보다 크거나 같으면,
                     r.status = statusCodes.BAD_INPUT;
                     r.data = {
                         "message": "송금 한도 초과입니다."

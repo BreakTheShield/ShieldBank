@@ -24,8 +24,8 @@ router.get('/', function (req, res, next) {
                         if (error) {
                             throw error;
                         }
-                        fs.unlink(fp, err => {
-                        })
+                       // fs.unlink(fp, err => {
+                       // })
                         res.redirect('viewBoard');
                     });
                 });

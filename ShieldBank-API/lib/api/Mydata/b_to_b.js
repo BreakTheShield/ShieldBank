@@ -8,7 +8,7 @@ var { validateUserToken } = require("../../../middlewares/validateToken");
 var { encryptResponse, decryptRequest } = require("../../../middlewares/crypt");
 
 const axios = require('axios');
-const apiUrl = 'http://20.0.22.40:3000/api/mydata/send_btob';
+const apiUrl = 'http://20.0.20.221:3000/api/mydata/send_btob';
 
 /**
  * Balance transfer route
