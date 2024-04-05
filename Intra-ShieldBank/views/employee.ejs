@@ -1,0 +1,49 @@
+<%- include("_header") -%>
+
+<h1>직원목록(<%= model.length %>명)</h1>
+
+<div class="d-flex justify-content-between mb-3">
+  <form action="/search" method="get" class="form-inline">
+    <div class="form-group mr-2">
+      <input type="text" class="form-control" name="name" placeholder="Search by Name">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+</div>
+<br>
+
+<div class="table-responsive-sm">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Dept</th>
+        <th>PrivateNum</th>
+        <th>Account</th>
+        <th>Salary</th>
+        <th class="d-print-none">
+          <a class="btn btn-sm btn-success" href="/create">Add</a>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (const emp of model) { %>
+        <tr>
+          <td><%= emp.name %></td>
+          <td><%= emp.dept %></td>
+          <td><%= emp.pNum %></td>
+          <td><%= emp.account %></td>
+          <td><%= emp.salary %></td>
+          <td class="d-print-none">
+            <a class="btn btn-sm btn-warning" href="/edit/<%= emp.Emp_ID %>">Edit</a>
+            <a class="btn btn-sm btn-danger" href="/delete/<%= emp.Emp_ID %>">Delete</a>
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+
+
+<%- include("_footer") -%>
